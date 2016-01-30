@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald:400,300,700);
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
+@import url(https://fonts.googleapis.com/css?family=Teko&subset=devanagari,latin);
 
 *{
 	font-family: 'Oswald', sans-serif;
@@ -348,4 +349,8 @@
 
 .st_footer_icons span a:hover{
 	color:#F3714F;
+}
+
+.st_hindi_font{
+	font-family: 'Teko', sans-serif;
 }
