@@ -140,6 +140,10 @@ st_main_obj.onClickMenuItemContact = function(e){
 	$('body').animate({ scrollTop : screenScrollTop-50},800);
 }
 
+st_main_obj.onClickMenuItemWork = function(e){
+	window.location.href = "https://github.com/sahilthakral23";
+}
+
 st_main_obj.onClickMenuItemResume = function(e){
 	window.location.href = "./SahilThakral.pdf";
 }
