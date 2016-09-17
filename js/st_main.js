@@ -180,7 +180,7 @@ st_main_obj.onClickSendMessage = function(){
 	var senderEmail = st_main_obj.controls.st_contact_email().val();
 	var senderMessage = st_main_obj.controls.st_contact_message().val();
 	$.ajax({
-		method: "POST",
+		type: "POST",
 		url: " https://9hj23ob5ie.execute-api.us-east-1.amazonaws.com/prod",
 		contentType: "application/json",
 		data: { "from" : senderEmail, "subject" : "From-" + senderName+" (Sahil Portfolio)", "message" : senderMessage },
