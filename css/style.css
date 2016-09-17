@@ -354,3 +354,11 @@
 .st_hindi_font{
 	font-family: 'Teko', sans-serif;
 }
+
+.st_notify{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	text-align: center;
+	font-size:14px;
+	color:#F3714F;
+}

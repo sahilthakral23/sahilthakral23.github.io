@@ -42,6 +42,21 @@ st_main_obj.controls = {
 	},
 	st_say_hello_btn:function(){
 		return $("#st_say_hello_btn");
+	},
+	st_main_send_message_btn: function(){
+		return $("#st_main_send_message_btn");
+	},
+	st_contact_name: function(){
+		return $("#st_contact_name");
+	},
+	st_contact_email: function(){
+		return $("#st_contact_email");
+	},
+	st_contact_message: function(){
+		return $("#st_contact_message");
+	},
+	st_main_send_notify: function(){
+		return $("#st_main_send_notify");
 	}
 };
 
@@ -111,6 +126,9 @@ st_main_obj.createHandlers = function(){
 	if(st_main_obj.controls.st_say_hello_btn() !== null){
 		st_main_obj.controls.st_say_hello_btn().unbind('click').bind('click', st_main_obj.onClickSayHelloBtn);
 	}
+	if(st_main_obj.controls.st_main_send_message_btn() !== null){
+		st_main_obj.controls.st_main_send_message_btn().unbind('click').bind('click', st_main_obj.onClickSendMessage);
+	}
 }
 
 st_main_obj.onClickNavIcon = function(e){
@@ -155,6 +173,30 @@ st_main_obj.onClickLogo = function(e){
 st_main_obj.onClickSayHelloBtn = function(){
 	var screenScrollTop = st_main_obj.controls.st_contact_screen().offset().top;
 	$('body').animate({ scrollTop : screenScrollTop-50},800);
+}
+
+st_main_obj.onClickSendMessage = function(){
+	var senderName = st_main_obj.controls.st_contact_name().val();
+	var senderEmail = st_main_obj.controls.st_contact_email().val();
+	var senderMessage = st_main_obj.controls.st_contact_message().val();
+	$.ajax({
+		url: "https://d89vcjoyo7.execute-api.us-east-1.amazonaws.com/prod/",
+		method: "GET",
+		contentType: "application/json",
+		data: { "from" : senderEmail, "subject" : "From-" + senderName+" (Sahil Portfolio)", "message" : senderMessage },
+		success: function(data){
+			setTimeout(function(){
+				st_main_obj.controls.st_main_send_notify().text("Message send Successfully.");
+			}, 2000);
+			st_main_obj.controls.st_main_send_notify().text();
+		},
+		error: function(err){
+			setTimeout(function(){
+				st_main_obj.controls.st_main_send_notify().text("Some error occurred while sending message.");
+			}, 2000);
+			st_main_obj.controls.st_main_send_notify().text();
+		}
+	});
 }
 
 $(document).ready(function(){
