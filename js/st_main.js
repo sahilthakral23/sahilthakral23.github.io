@@ -181,7 +181,7 @@ st_main_obj.onClickSendMessage = function(){
 	var senderMessage = st_main_obj.controls.st_contact_message().val();
 	$.ajax({
 		url: "https://d89vcjoyo7.execute-api.us-east-1.amazonaws.com/prod/",
-		method: "GET",
+		method: "POST",
 		contentType: "application/json",
 		data: { "from" : senderEmail, "subject" : "From-" + senderName+" (Sahil Portfolio)", "message" : senderMessage },
 		success: function(data){
