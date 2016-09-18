@@ -183,7 +183,6 @@ st_main_obj.onClickSendMessage = function(){
 		type: "POST",
 		url: " https://9hj23ob5ie.execute-api.us-east-1.amazonaws.com/prod",
 		contentType: "text/plain",
-		dataType: 'json',
 		data: { "from" : senderEmail, "subject" : "From-" + senderName+" (Sahil Portfolio)", "message" : senderMessage },
 		success: function(data){
 			setTimeout(function(){
