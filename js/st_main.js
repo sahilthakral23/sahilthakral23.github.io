@@ -186,7 +186,7 @@ st_main_obj.onClickSendMessage = function(){
 		data: JSON.stringify({ "from" : senderEmail, "subject" : "From-" + senderName +" (Sahil Portfolio)", "message" : senderMessage }),
 		success: function(data){
 			setTimeout(function(){
-				st_main_obj.controls.st_main_send_notify().text("Message send Successfully.");
+				st_main_obj.controls.st_main_send_notify().text("Message sent Successfully.");
 			}, 2000);
 			st_main_obj.controls.st_main_send_notify().text();
 		},
