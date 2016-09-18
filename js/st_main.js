@@ -182,8 +182,8 @@ st_main_obj.onClickSendMessage = function(){
 	$.ajax({
 		type: "POST",
 		url: " https://9hj23ob5ie.execute-api.us-east-1.amazonaws.com/prod",
-		contentType: "application/json; charset=UTF-8",
-		data: { "from" : senderEmail, "subject" : "From-" + senderName+" (Sahil Portfolio)", "message" : senderMessage },
+		contentType: "application/json",
+		data: JSON.stringify({ "from" : senderEmail, "subject" : "From-" + senderName +" (Sahil Portfolio)", "message" : senderMessage }),
 		success: function(data){
 			setTimeout(function(){
 				st_main_obj.controls.st_main_send_notify().text("Message send Successfully.");
