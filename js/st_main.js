@@ -175,28 +175,55 @@ st_main_obj.onClickSayHelloBtn = function(){
 	$('body').animate({ scrollTop : screenScrollTop-50},800);
 }
 
+st_main_obj.validateName = function(name){
+    return new RegExp(/^[a-zA-Z ]+$/).test(name);
+}
+
+st_main_obj.validateEmail = function(email){
+    return new RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i).test(email);
+}
+
+st_main_obj.validateMessage = function(message){
+    return new RegExp(/^[a-zA-Z .,-]+$/m).test(message);
+}
+
+st_main_obj.removeText = function(){
+    setTimeout(function(){
+        st_main_obj.controls.st_main_send_notify().text("");
+    },2000);
+}
+
 st_main_obj.onClickSendMessage = function(){
+    st_main_obj.controls.st_main_send_notify().text("");
+    st_main_obj.controls.st_main_send_notify().append("<i class='fa fa-spinner fa-spin'></i>");
+    
 	var senderName = st_main_obj.controls.st_contact_name().val();
 	var senderEmail = st_main_obj.controls.st_contact_email().val();
 	var senderMessage = st_main_obj.controls.st_contact_message().val();
-	$.ajax({
-		type: "POST",
-		url: " https://9hj23ob5ie.execute-api.us-east-1.amazonaws.com/prod",
-		contentType: "application/json",
-		data: JSON.stringify({ "from" : senderEmail, "subject" : "From-" + senderName +" (Sahil Portfolio)", "message" : senderMessage }),
-		success: function(data){
-			setTimeout(function(){
-				st_main_obj.controls.st_main_send_notify().text("Message sent Successfully.");
-			}, 2000);
-			st_main_obj.controls.st_main_send_notify().text();
-		},
-		error: function(err){
-			setTimeout(function(){
-				st_main_obj.controls.st_main_send_notify().text("Some error occurred while sending message.");
-			}, 2000);
-			st_main_obj.controls.st_main_send_notify().text();
-		}
-	});
+    
+    if(st_main_obj.validateName(senderName) && st_main_obj.validateEmail(senderEmail) && st_main_obj.validateMessage(senderMessage))
+    {
+        $.ajax({
+            type: "POST",
+            url: " https://9hj23ob5ie.execute-api.us-east-1.amazonaws.com/prod",
+            contentType: "application/json",
+            data: JSON.stringify({ "from" : senderEmail, "subject" : "From-" + senderName +" (Sahil Portfolio)", "message" : senderMessage }),
+            success: function(data){
+                st_main_obj.controls.st_main_send_notify().text("Message sent Successfully.");
+                st_main_obj.removeText();
+            },
+            error: function(err){
+                st_main_obj.controls.st_main_send_notify().text("Some error occurred while sending message.");
+                st_main_obj.removeText();
+            }
+        });
+    }
+    else
+    {
+        st_main_obj.controls.st_main_send_notify().text("Please enter correct inputs in the form.");
+        st_main_obj.removeText();
+    }
+	
 }
 
 $(document).ready(function(){
